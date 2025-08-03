@@ -1,37 +1,13 @@
-#include <WiFi.h>
 
-const char* ssid = "Wokwi-GUEST";
-const char* password = "";
-
-void wifiConnect() {
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println(" Connected!");
-}
 
 void setup() {
   Serial.begin(9600);
-  Serial.print("Connecting to WiFi");
-
-  wifiConnect();
+  mqttSetup();
 }
 
 void loop() {
-  if (WiFi.status() != WL_CONNECTED) {
-    Serial.print("Reconnecting to WiFi");
-    wifiConnect();
-  }
-
-  float t, h;
-  getDHT(t, h);
-  Serial.println("Temp: ");
-  Serial.println(t);
-  Serial.println("- Humi");
+  // mqttClient.publish("/iot/food_and_drink", "Hello from ESP32");
+  // delay(1000);
+  mqttLoop();
   
-  Serial.println(h);
-
-  delay(5000);
 }

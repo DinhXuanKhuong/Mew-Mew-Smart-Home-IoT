@@ -3,7 +3,7 @@
 float getMQ2() {
     int adcValue = analogRead(MQ2_PIN);
     float voltage = adcValue * (3.3 / 4095.0);
-    return voltage
+    return voltage;
 }
 
 String getGasLevel(float voltage) {
